@@ -103,7 +103,7 @@ def home():
     if session['mode'] == 'solo':
         session['greeting'] = session['player1']
     else:
-        session['greeting'] = f'{session['player1']} and {session['player2']}'
+        session['greeting'] = f"{session['player1']} and {session['player2']}"
     
     if 'history' not in session: session['history'] = []
     if 'player' not in session: session['player'] = session['player1']
@@ -202,7 +202,7 @@ def home():
                                 'message': bot_message
                             })
 
-                            session['result'] = f'You Won! Your Score is {str(int(session['score']/2))}'
+                            session['result'] = f"You Won! Your Score is {str(int(session['score']/2))}"
                             session['winner'] = 'user'
 
             else:
@@ -216,10 +216,10 @@ def home():
                 })
 
                 if session['mode'] == 'solo':
-                    session['result'] = f'Bot won. Your Score is {str(int(session['score']/2))}'
+                    session['result'] = f"Bot won. Your Score is {str(int(session['score']/2))}"
                     session['winner'] = 'bot'
                 else:
-                    session['result'] = f'{session['non-player']} won! Total number of rounds: {str(int(session['score']/2))}'
+                    session['result'] = f"{session['non-player']} won! Total number of rounds: {str(int(session['score']/2))}"
                     session['winner'] = 'user'
 
     return render_template('index.html', username=session['greeting'], player_one=session['player1'], first_letter=fixed_letter, history=session['history'], result=session['result'], winner=session['winner'])
