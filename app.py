@@ -224,5 +224,6 @@ def home():
 
     return render_template('index.html', username=session['greeting'], player_one=session['player1'], first_letter=fixed_letter, history=session['history'], result=session['result'], winner=session['winner'])
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
