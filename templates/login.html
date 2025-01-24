@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MusicHaze Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='login_style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>MusicHaze</h1>
+    </header>
+    <div class="container">
+        <form method="post">
+            <h2>Select Mode of Play</h2>
+            <div class="mode-selection">
+                <input type="radio" id="solo" name="mode" value="solo" required>
+                <label for="solo">Solo (Play with Bot)</label><br>
+                <input type="radio" id="2player" name="mode" value="2player">
+                <label for="2player">2 Player Game (1 vs 1)</label>
+            </div>
+            <div id="player-names" style="display: none;">
+                <input type="text" id="player1" name="player1" placeholder="Player 1 Name" required>
+                <input type="text" id="player2" name="player2" placeholder="Player 2 Name" style="display: none;">
+            </div>
+            <button type="submit">Proceed</button>
+        </form>
+    </div>
+    <script>
+        document.querySelectorAll('input[name="mode"]').forEach((elem) => {
+            elem.addEventListener("change", function(event) {
+                const mode = event.target.value;
+                const playerNamesDiv = document.getElementById("player-names");
+                const player1 = document.getElementById("player1");
+                const player2 = document.getElementById("player2");
+
+                if (mode === '2player') {
+                    playerNamesDiv.style.display = 'block'; 
+                    player1.placeholder = "Player 1 Name";
+                    player2.style.display = 'block';
+                    player2.required = true;
+                } else if (mode === 'solo') {
+                    playerNamesDiv.style.display = 'block'; 
+                    player1.placeholder = "Player Name";
+                    player2.style.display = 'none'; 
+                    player2.required = false;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

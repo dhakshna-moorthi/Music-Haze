@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MusicHaze Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index_style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>MusicHaze</h1>
+    </header>
+    <div>
+        <div class="conversation-box">
+            <p class="first-letter">To start, {{player_one}}, enter a song starting '{{first_letter}}'</p>
+            {% for entry in history %}
+                <div class="conversation-entry {% if entry.player == 'Bot' or entry.playernum == 'two' %}bot-response{% else %}user-response{% endif %}">
+                    <div class="player"><strong><i>{{ entry.player }}</i></strong></div>
+                    {% if entry.song %}
+                        <div> 🎶 {{ entry.song }} </div>
+                    {% endif %}
+                    {% if entry.artist %}
+                        <div>🤵 {{ entry.artist }} </div>
+                    {% endif %}
+                    <div class="message"><i>{{ entry.message }}</i></div>
+                    {% if album_cover_url %}
+                        <img src="{{ entry.album_cover }}" alt="Album Cover">
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            {% if result %}
+                <p class="result {% if winner == 'user' %}user-win{% else %}bot-win{% endif %}"> {{ result }} </p>
+            {% endif %}
+
+        </div>
+
+        <form action="{{ url_for('home') }}" method="post" class="song-form">
+            <input type="text" id="song" name="song" placeholder="Enter your song name - artist name" required>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
